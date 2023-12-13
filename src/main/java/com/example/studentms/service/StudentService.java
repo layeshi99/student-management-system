@@ -50,4 +50,24 @@ public class StudentService {
         }
 
     }
+
+    //To Search Student
+    public StudentDTO searchStudent(int stdId){
+        if(studentRepo.existsById(stdId)){
+            Student student=studentRepo.findById(stdId).orElse(null);
+            return modelMapper.map(student,StudentDTO.class);
+        }else{
+            return null;
+        }
+    }
+
+    //To delete a student
+    public String deleteStudent(int stdId){
+        if(studentRepo.existsById(stdId)){
+            studentRepo.deleteById(stdId);
+            return VarList.RSP_SUCCESS;
+        }else{
+            return VarList.RSP_NO_DATA_FOUND;
+        }
+    }
 }
