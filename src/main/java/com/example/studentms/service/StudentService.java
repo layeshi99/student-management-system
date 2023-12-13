@@ -6,8 +6,12 @@ import com.example.studentms.repo.StudentRepo;
 import com.example.studentms.util.VarList;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -27,6 +31,13 @@ public class StudentService {
             return VarList.RSP_SUCCESS;
         }
 
+    }
+
+    //To Read Students
+    public List<StudentDTO> getAllStudents(){
+        List<Student> studentList=studentRepo.findAll();
+        return modelMapper.map(studentList,new TypeToken<ArrayList<StudentDTO>>(){
+        }.getType());
     }
 
     //To Update Student

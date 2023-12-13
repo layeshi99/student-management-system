@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/student")
 public class StudentController {
@@ -51,6 +53,25 @@ public class StudentController {
 
         }
 
+    }
+
+    //To Read Students
+    @GetMapping(value = "/getAllStudents")
+    public ResponseEntity getAllStudents(){
+        try{
+            List<StudentDTO> studentDTOList=studentService.getAllStudents();
+            responseDTO.setCode(VarList.RSP_SUCCESS);
+            responseDTO.setMessage("Success");
+            responseDTO.setContent(studentDTOList);
+            return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
+
+        }catch (Exception e){
+            responseDTO.setCode(VarList.RSP_ERROR);
+            responseDTO.setMessage(e.getMessage());
+            responseDTO.setContent(null);
+            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
     }
 
     //To Update Student
