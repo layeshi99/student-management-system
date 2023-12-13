@@ -17,12 +17,25 @@ public class StudentService {
     private StudentRepo studentRepo;
     @Autowired
     private ModelMapper modelMapper;
+
+    //To Create Student
     public String saveStudent(StudentDTO studentDTO){
         if(studentRepo.existsById(studentDTO.getStdId())){
             return VarList.RSP_DUPLICATED;
         }else{
             studentRepo.save(modelMapper.map(studentDTO, Student.class));
             return VarList.RSP_SUCCESS;
+        }
+
+    }
+
+    //To Update Student
+    public String updateStudent(StudentDTO studentDTO){
+        if(studentRepo.existsById(studentDTO.getStdId())){
+            studentRepo.save(modelMapper.map(studentDTO,Student.class));
+            return VarList.RSP_SUCCESS;
+        }else{
+            return VarList.RSP_NO_DATA_FOUND;
         }
 
     }
