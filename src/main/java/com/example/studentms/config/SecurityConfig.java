@@ -16,6 +16,7 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/").permitAll();
+                    //auth.requestMatchers("/v2/api-docs, /swagger-resources/**, /swagger-ui.html, /webjars/**").permitAll();
                     //auth.requestMatchers("/favicon.ico").permitAll();
                     auth.anyRequest().authenticated();
                 })
@@ -25,3 +26,4 @@ public class SecurityConfig {
     }
 
 }
+

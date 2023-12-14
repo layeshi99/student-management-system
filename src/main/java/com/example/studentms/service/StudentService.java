@@ -22,7 +22,11 @@ public class StudentService {
     @Autowired
     private ModelMapper modelMapper;
 
-    //To Create Student
+    /**
+     * this method use to save a student
+     * @param studentDTO
+     * @return
+     */
     public String saveStudent(StudentDTO studentDTO){
         if(studentRepo.existsById(studentDTO.getStdId())){
             return VarList.RSP_DUPLICATED;
