@@ -23,7 +23,7 @@ public class StudentService {
     private ModelMapper modelMapper;
 
     /**
-     * this method use to save a student
+     * this method is used to save a student
      * @param studentDTO
      * @return
      */
@@ -37,14 +37,21 @@ public class StudentService {
 
     }
 
-    //To Read Students
+    /**
+     * this method is used to get all students
+     * @return
+     */
     public List<StudentDTO> getAllStudents(){
         List<Student> studentList=studentRepo.findAll();
         return modelMapper.map(studentList,new TypeToken<ArrayList<StudentDTO>>(){
         }.getType());
     }
 
-    //To Update Student
+    /**
+     * this method is used to update a student
+     * @param studentDTO
+     * @return
+     */
     public String updateStudent(StudentDTO studentDTO){
         if(studentRepo.existsById(studentDTO.getStdId())){
             studentRepo.save(modelMapper.map(studentDTO,Student.class));
@@ -55,7 +62,11 @@ public class StudentService {
 
     }
 
-    //To Search Student
+    /**
+     * this method is used to search a student
+     * @param stdId
+     * @return
+     */
     public StudentDTO searchStudent(int stdId){
         if(studentRepo.existsById(stdId)){
             Student student=studentRepo.findById(stdId).orElse(null);
@@ -65,7 +76,11 @@ public class StudentService {
         }
     }
 
-    //To delete a student
+    /**
+     * this method is used to delete a student
+     * @param stdId
+     * @return
+     */
     public String deleteStudent(int stdId){
         if(studentRepo.existsById(stdId)){
             studentRepo.deleteById(stdId);
